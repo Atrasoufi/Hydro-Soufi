@@ -9,7 +9,7 @@ class Industry(models.Model):
         through="IndustryProduct",
         related_name="industries",
     )
-    slug = models.CharField(max_length=255, unique=True)
+    slug = models.SlugField(max_length=255, unique=True)
     
     short_description = models.TextField(blank=True)
     full_description = models.TextField(blank=True)
