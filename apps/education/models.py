@@ -36,7 +36,7 @@ class EducationContent:
     category = models.ForeignKey(
         'EducationCategory',
         on_delete=models.SET_NULL,
-        null=True.
+        null=True,
         blank=True,
         related_name='contents'
     )
