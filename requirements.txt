@@ -3,3 +3,4 @@ Django==6.1.2
 dotenv==0.9.9
 python-dotenv==1.2.4
 sqlparse==0.6.0
+django-jalali
