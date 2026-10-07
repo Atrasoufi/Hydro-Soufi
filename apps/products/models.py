@@ -6,7 +6,13 @@ from django_jalali.db import models as jmodels
 
 
 class ProductCategories(models.Model):
-    # parent_id =
+    parent = models.ForeignKey(
+        "self",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="children",
+    )
     name = models.CharField(max_length=50)
     slug = models.CharField(max_length=200)
     description = models.TextField()
@@ -18,7 +24,7 @@ class ProductCategories(models.Model):
 
 
 class Products(models.Model):
-    category_id = models.ForeignKey(
+    category = models.ForeignKey(
         ProductCategories, on_delete=models.PROTECT, related_name="products"
     )
 
