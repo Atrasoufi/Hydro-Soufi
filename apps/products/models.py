@@ -48,6 +48,29 @@ class Products(models.Model):
     updated_at = jmodels.jDateTimeField()
 
 
+class ProductSpec(models.Model):
+    product = models.ForeignKey(
+        Products,
+        on_delete=models.CASCADE,
+        related_name="specs",
+    )
+
+    specification_name = models.CharField(max_length=255)
+
+    specification_value = models.CharField(max_length=500)
+
+    unit = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+    )
+
+    sort_order = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.specification_name}: {self.specification_value}"
+
+
 class ProductImages(models.Model):
     product = models.ForeignKey(
         Products, on_delete=models.CASCADE, related_name="images"
