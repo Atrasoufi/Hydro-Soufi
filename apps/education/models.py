@@ -7,6 +7,21 @@ from django_jalali.db import models as jmodels
 User = get_user_model()
 
 class EducationCategory:
+    products = models.ManyToManyField(
+        "products.Product",
+        related_name="educations"
+    )
+
+    industries = models.ManyToManyField(
+        "industries.Industry",
+        related_name="educations"
+    )
+
+    services = models.ManyToManyField(
+        "services.Service",
+        related_name="educations"
+    )
+
     parent = models.ForeignKey(
         "self",
         on_delete=models.SET_NULL,
@@ -78,7 +93,7 @@ class EducationContent:
     )
 
     featured_media = models.ForeignKey(
-        'Media',
+        'media.Media',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -113,3 +128,33 @@ class EducationContent:
     updated_at = jmodels.jDateTimeField(
         auto_now=True
     )
+
+class EducationMedia(models.Model):
+    education = models.ForeignKey(
+        "EducationContent",
+        on_delete=models.CASCADE,
+        related_name="media"
+
+    )
+
+    media = models.ForeignKey(
+        "media.Media",
+        on_delete=models.CASCADE,
+        related_name="education_media"
+    )
+
+    media_type = models.CharField(max_length=30)
+
+    sort_order = models.IntegerField(default=0)
+
+    is_primary = models.BooleanField(default=False)
+
+    caption = models.CharField(max_length=500, null=True, blank=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["education", "media"],
+                name="unique_education_media"
+            )
+        ]
