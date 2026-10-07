@@ -36,4 +36,24 @@ class SiteSettings(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
+
+class AboutSection(models.Model):
+    title = models.CharField(max_length=255)
+    slug = models.CharField(max_length=255, unique=True)
     
+    short_description = models.TextField()
+    content = models.TextField()
+    
+    image_media = models.ForeignKey(
+        Media,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="about_sections",
+    )
+    
+    sort_order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
