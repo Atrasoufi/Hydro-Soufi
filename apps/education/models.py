@@ -6,21 +6,7 @@ from django_jalali.db import models as jmodels
 
 User = get_user_model()
 
-class EducationCategory:
-    products = models.ManyToManyField(
-        "products.Product",
-        related_name="educations"
-    )
-
-    industries = models.ManyToManyField(
-        "industries.Industry",
-        related_name="educations"
-    )
-
-    services = models.ManyToManyField(
-        "services.Service",
-        related_name="educations"
-    )
+class EducationCategory(models.Model):
 
     parent = models.ForeignKey(
         "self",
@@ -47,7 +33,23 @@ class EducationCategory:
     sort_order = models.IntegerField(default=0)
 
 
-class EducationContent:
+class EducationContent(models.Model):
+
+    products = models.ManyToManyField(
+        "products.Product",
+        related_name="educations"
+    )
+    
+    industries = models.ManyToManyField(
+        "industries.Industry",
+        related_name="educations"
+    )
+
+    services = models.ManyToManyField(
+        "services.Service",
+        related_name="educations"
+    )
+
     category = models.ForeignKey(
         'EducationCategory',
         on_delete=models.SET_NULL,
@@ -69,7 +71,7 @@ class EducationContent:
         unique=True
     )
 
-    expert = models.TextField(
+    excerpt = models.TextField(
         null=True,
         blank=True
     )
@@ -101,7 +103,7 @@ class EducationContent:
     )
 
     STATUS = [
-        ("DRAFT", "Drart"),
+        ("DRAFT", "Draft"),
         ("PUBLISHED", "Published"),
         ("ARCHIVED", "Archived"),
     ]
