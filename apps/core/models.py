@@ -1,5 +1,5 @@
 from django.db import models
-
+from django_jalali.db import models as jmodels
 from apps.media.models import Media
 
 class SiteSettings(models.Model):
@@ -33,8 +33,8 @@ class SiteSettings(models.Model):
     telegram_url = models.URLField(max_length=500, blank=True)
     whatsapp_url = models.URLField(max_length=500, blank=True)
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = jmodels.jDateTimeField(auto_now_add=True)
+    updated_at = jmodels.jDateTimeField(auto_now=True)
     
 
 class AboutSection(models.Model):
@@ -55,5 +55,5 @@ class AboutSection(models.Model):
     sort_order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = jmodels.jDateTimeField(auto_now_add=True)
+    updated_at = jmodels.jDateTimeField(auto_now=True)
