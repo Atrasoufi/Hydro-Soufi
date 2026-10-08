@@ -26,6 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
+AUTH_USER_MODEL = "accounts.CustomUser"
 # Application definition
 
 INSTALLED_APPS = [
@@ -35,6 +37,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Local apps
+    "apps.accounts",
+    "apps.products",
+    "apps.leads",
+    "apps.seo",
 ]
 
 MIDDLEWARE = [
