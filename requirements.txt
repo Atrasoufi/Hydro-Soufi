@@ -1,6 +1,9 @@
 asgiref==3.12.1
 Django==6.1.2
+django-jalali==7.4.0
+djangorestframework==3.18.3
 dotenv==0.9.9
+jalali_core==1.0.0
+jdatetime==6.1.0
 python-dotenv==1.2.4
 sqlparse==0.6.0
-django-jalali

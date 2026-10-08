@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     "apps.products",
     "apps.leads",
     "apps.seo",
+    # Theart party apps
+    "rest_framework",
 ]
 
 MIDDLEWARE = [

@@ -83,10 +83,15 @@ class ProductImages(models.Model):
     is_primary = models.BooleanField(default=False)
     sorted_order = models.IntegerField(default=0)
 
-    # class Meta:
-    #     constraints = [
-    #         models.UniqueConstraint(
-    #             fields=["product", "media"],
-    #             name="unique_user_product",
-    #         )
-    #     ]
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["product"],
+                condition=models.Q(is_primary=True),
+                name="unique_primary_image_per_product",
+            ),
+            #         models.UniqueConstraint(
+            #             fields=["product", "media"],
+            #             name="unique_user_product",
+            #         )
+        ]
