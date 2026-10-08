@@ -19,8 +19,9 @@ class ProductDetailView(RetrieveAPIView):
                     .only(
                         "id",
                         "alt_text",
+                        "product",
                         "is_primary",
-                        "media_id",
+                        "media",
                         "media__file_url",
                     )
                     .order_by("id")
