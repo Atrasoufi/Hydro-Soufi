@@ -92,8 +92,8 @@ class ProductImages(models.Model):
                 condition=models.Q(is_primary=True),
                 name="unique_primary_image_per_product",
             ),
-            #         models.UniqueConstraint(
-            #             fields=["product", "media"],
-            #             name="unique_user_product",
-            #         )
+            models.UniqueConstraint(
+                fields=["product", "media"],
+                name="unique_user_product",
+            ),
         ]
