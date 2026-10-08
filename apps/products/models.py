@@ -76,7 +76,9 @@ class ProductImages(models.Model):
         Products, on_delete=models.CASCADE, related_name="images"
     )
 
-    # media = related to media
+    media = models.ForeignKey(
+        "media.Media", on_delete=models.PROTECT, related_name="product_images"
+    )
 
     alt_text = models.CharField(max_length=50)
 
