@@ -8,14 +8,14 @@ User = get_user_model()
 # Create your models here.
 class ContactRequest(models.Model):
 
-    name = models.CharField(255)
-    phone = models.CharField(30)
-    email = models.CharField(255, null=True, blank=True)
+    name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=30)
+    email = models.CharField(max_length=255, null=True, blank=True)
 
-    subject = models.CharField(255)
+    subject = models.CharField(max_length=255)
     message = models.TextField()
 
-    status = models.CharField(default="NEW")
+    status = models.CharField(max_length=90,default="NEW")
 
     assigned_to = models.ForeignKey(
         User,
@@ -26,4 +26,4 @@ class ContactRequest(models.Model):
     )
 
     created_at = jmodels.jDateTimeField(auto_now_add=True)
-    updated_at = jmodels.jDateTimeField()
+    updated_at = jmodels.jDateTimeField(auto_created=True)
