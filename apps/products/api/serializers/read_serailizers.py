@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ...models import Products, ProductImages
+from ...models import Products, ProductCategories
 
 
 class ProductListSerializer(serializers.ModelSerializer):
@@ -20,3 +20,10 @@ class ProductListSerializer(serializers.ModelSerializer):
             return None
 
         return obj.primary_image[0].media.file_url
+
+
+class ProductCategoryFilterSerialiser(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProductCategories
+        fields = ["id", "name"]

@@ -17,8 +17,13 @@ class ProductCategories(models.Model):
     slug = models.CharField(max_length=200)
     description = models.TextField()
 
-    # image_media_id = relation to media
-
+    image_media = models.ForeignKey(
+        "media.Media",
+        on_delete=models.PROTECT,
+        related_name="product_images",
+        null=True,
+        blank=True,
+    )
     is_active = models.BooleanField(default=True)
     sort_order = models.IntegerField(default=0)
 

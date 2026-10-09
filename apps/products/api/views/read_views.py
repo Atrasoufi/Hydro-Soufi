@@ -1,6 +1,9 @@
-from serializers.read_serailizers import ProductListSerializer
+from serializers.read_serailizers import (
+    ProductListSerializer,
+    ProductCategoryFilterSerialiser,
+)
 from rest_framework.generics import ListAPIView
-from ...models import Products, ProductImages
+from ...models import Products, ProductImages, ProductCategories
 from django.db.models import Prefetch
 from rest_framework.permissions import AllowAny
 from rest_framework.pagination import PageNumberPagination
@@ -45,3 +48,11 @@ class ProductFeaturedListView(ProductListView):
         query = super().get_queryset()
 
         return query.filter(is_featured=True)
+
+
+class ProductCategoryFilterView(ListAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = ProductCategoryFilterSerialiser
+
+    def get_queryset(self):
+        return ProductCategories.objects.only("id", "name")
