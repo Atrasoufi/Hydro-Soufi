@@ -2,7 +2,7 @@ from rest_framework.generics import RetrieveAPIView
 from rest_framework.permissions import AllowAny
 from django.db.models import Prefetch
 from ..serializers.base_serializers import ProductDetailSerializer
-from ...models import Products, ProductImages
+from ...models import Products, ProductImages, ProductSpec
 
 
 class ProductDetailView(RetrieveAPIView):
@@ -18,13 +18,25 @@ class ProductDetailView(RetrieveAPIView):
                     ProductImages.objects.select_related("media")
                     .only(
                         "id",
-                        "alt_text",
                         "product",
-                        "is_primary",
                         "media",
                         "media__file_url",
+                        "alt_text",
+                        "is_primary",
+                        "sorted_order",
                     )
-                    .order_by("id")
+                    .order_by("sorted_order", "id")
                 ),
-            )
+            ),
+            Prefetch(
+                "specs",
+                queryset=(
+                    ProductSpec.objects.only(
+                        "id",
+                        "product",
+                        "specification_name",
+                        "specification_value",
+                    ).order_by("sort_order", "id")
+                ),
+            ),
         )
