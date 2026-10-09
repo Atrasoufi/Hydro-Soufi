@@ -3,11 +3,17 @@ from rest_framework.generics import ListAPIView
 from ...models import Products, ProductImages
 from django.db.models import Prefetch
 from rest_framework.permissions import AllowAny
+from rest_framework.pagination import PageNumberPagination
+
+
+class ProductPagination(PageNumberPagination):
+    page_size = 10
 
 
 class ProductListView(ListAPIView):
     serializer_class = ProductListSerializer
     permission_classes = [AllowAny]
+    pagination_class = ProductPagination
 
     def get_queryset(self):
         return Products.objects.only(
