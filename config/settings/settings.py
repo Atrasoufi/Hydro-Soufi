@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django_jalali",
-    "rest_framework",
     # Local apps
     "apps.accounts",
     "apps.products",
@@ -54,6 +52,7 @@ INSTALLED_APPS = [
     # Third-party apps
     "rest_framework",
     "django_filters",
+    "django_jalali",
 ]
 
 MIDDLEWARE = [
