@@ -38,6 +38,13 @@ class Products(models.Model):
     product_code = models.CharField(100, unique=True)
 
     manufacturing_type = models.CharField(max_length=50)
+    industry_product = models.ForeignKey(
+        "industries.Industry",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="products",
+    )
 
     is_custom = models.BooleanField(default=True)
 
@@ -85,10 +92,10 @@ class ProductImages(models.Model):
     is_primary = models.BooleanField(default=False)
     sorted_order = models.IntegerField(default=0)
 
-    # class Meta:
-    #     constraints = [
-    #         models.UniqueConstraint(
-    #             fields=["product", "media"],
-    #             name="unique_user_product",
-    #         )
-    #     ]
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["product", "media"],
+                name="unique_user_product",
+            )
+        ]

@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     "apps.products",
     "apps.leads",
     "apps.seo",
+    # Third-party apps
+    "rest_framework",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
