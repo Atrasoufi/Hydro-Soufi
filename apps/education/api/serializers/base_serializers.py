@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ...models import EducationContent
+from ...models import EducationContent,EducationCategory
 
 class EducationContentSerializer(serializers.ModelSerializer):
 
@@ -44,19 +44,10 @@ class EducationHomeSerializer(serializers.ModelSerializer):
         ]
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+class EducationCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EducationCategory
+        fields = [
+            'id',
+            'name'
+        ]

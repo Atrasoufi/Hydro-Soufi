@@ -46,3 +46,4 @@ class EducationHomeAPIView(ListAPIView):
             .order_by("-published_at", "-id")
             .select_related("featured_media")
         )
+
