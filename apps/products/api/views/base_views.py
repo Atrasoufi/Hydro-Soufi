@@ -2,7 +2,7 @@ from rest_framework.generics import RetrieveAPIView
 from rest_framework.permissions import AllowAny
 from django.db.models import Prefetch
 from ..serializers.base_serializers import ProductDetailSerializer
-from ...models import Products, ProductImages, ProductSpec
+from ...models import Product, ProductImages, ProductSpec
 
 
 class ProductDetailView(RetrieveAPIView):
@@ -11,7 +11,7 @@ class ProductDetailView(RetrieveAPIView):
     lookup_field = "slug"
 
     def get_queryset(self):
-        return Products.objects.select_related("category").prefetch_related(
+        return Product.objects.select_related("category").prefetch_related(
             Prefetch(
                 "images",
                 queryset=(

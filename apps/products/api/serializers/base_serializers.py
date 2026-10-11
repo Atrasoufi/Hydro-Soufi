@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ...models import Products, ProductImages, ProductSpec, ProductCategories
+from ...models import Product, ProductImages, ProductSpec, ProductCategories
 
 
 class ProductCategorySerialiser(serializers.ModelSerializer):
@@ -40,13 +40,13 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     product_specs = ProductSpecSerialiser(many=True, read_only=True)
 
     class Meta:
-        model = Products
+        model = Product
         fields = [
             "id",
             "name",
             "slug",
             "short_description",
-            "description",
+            "full_description",
             "images",
             "category",
             "product_specs",

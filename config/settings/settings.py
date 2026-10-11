@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_filters",
     "django_jalali",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -106,6 +107,19 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+# REST FRAMEWORK
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+# SPECTACULAR
+SPECTACULAR_SETTINGS = {
+    "TITLE": "My API",
+    "DESCRIPTION": "API documentation",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+}
 
 
 # Internationalization
