@@ -24,6 +24,24 @@ class EducationContentSerializer(serializers.ModelSerializer):
             'published_at',
         ]
 
+class EducationHomeSerializer(serializers.ModelSerializer):
+
+    featured_media = serializers.SerializerMethodField()
+    
+    def get_featured_media(self,education_content):
+        res = education_content.featured_media
+
+        if res:
+            return res.file_url
+
+        return None
+
+    class Meta:
+        model = EducationContent
+        fields = [
+            'title',
+            'featured_media'
+        ]
 
 
 
