@@ -22,7 +22,7 @@ class ProductListSerializer(serializers.ModelSerializer):
         return obj.primary_image[0].media.file_url
 
 
-class ProductCategoryFilterSerialiser(serializers.ModelSerializer):
+class ProductCategoryFilterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductCategories
