@@ -1,11 +1,12 @@
 from rest_framework import serializers
-from ...models import EducationContent,EducationCategory
+from ...models import EducationContent, EducationCategory
+
 
 class EducationContentSerializer(serializers.ModelSerializer):
 
     featured_media = serializers.SerializerMethodField()
 
-    def get_featured_media(self,education_content):
+    def get_featured_media(self, education_content):
         res = education_content.featured_media
 
         if res:
@@ -16,19 +17,20 @@ class EducationContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = EducationContent
         fields = [
-            'title',
-            'slug',
-            'excerpt',
-            'content_type',
-            'featured_media',
-            'published_at',
+            "title",
+            "slug",
+            "excerpt",
+            "content_type",
+            "featured_media",
+            "published_at",
         ]
+
 
 class EducationHomeSerializer(serializers.ModelSerializer):
 
     featured_media = serializers.SerializerMethodField()
-    
-    def get_featured_media(self,education_content):
+
+    def get_featured_media(self, education_content):
         res = education_content.featured_media
 
         if res:
@@ -38,16 +40,10 @@ class EducationHomeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EducationContent
-        fields = [
-            'title',
-            'featured_media'
-        ]
+        fields = ["title", "featured_media"]
 
 
 class EducationCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = EducationCategory
-        fields = [
-            'id',
-            'name'
-        ]
+        fields = ["id", "name"]
