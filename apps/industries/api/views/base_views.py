@@ -1,7 +1,11 @@
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny
 from ...models import Industry
-from apps.industries.api.serializers.base_serializers import IndustrySerializer
+from apps.industries.api.serializers.base_serializers import (
+    IndustrySerializer,
+    IndustryFilterSerializer,
+    IndustryHomeSerializer,
+)
 
 
 class IndustryListAPIView(ListAPIView):
@@ -16,16 +20,7 @@ class IndustryListAPIView(ListAPIView):
         )
 
 
-from rest_framework import generics
-
-from .models import Industry
-from .serializers import (
-    IndustryFilterSerializer,
-    IndustryHomeSerializer,
-)
-
-
-class IndustryFilterListView(generics.ListAPIView):
+class IndustryFilterListView(ListAPIView):
     serializer_class = IndustryFilterSerializer
 
     def get_queryset(self):
@@ -35,7 +30,7 @@ class IndustryFilterListView(generics.ListAPIView):
         ).order_by("sort_order", "id")
 
 
-class IndustryHomeListView(generics.ListAPIView):
+class IndustryHomeListView(ListAPIView):
     serializer_class = IndustryHomeSerializer
 
     def get_queryset(self):

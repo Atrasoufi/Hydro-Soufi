@@ -1,6 +1,8 @@
 from django.db import models
+
 # from apps.media.models import Media
 # from apps.products.models import Product
+
 
 class Industry(models.Model):
     name = models.CharField(max_length=255)
@@ -10,22 +12,22 @@ class Industry(models.Model):
         related_name="industries",
     )
     slug = models.SlugField(max_length=255, unique=True)
-    
+
     short_description = models.TextField(blank=True)
     full_description = models.TextField(blank=True)
-    
+
     icon = models.CharField(max_length=255, blank=True)
     cover_image = models.ForeignKey(
         "media.Media",
         on_delete=models.SET_NULL,
-                null=True,
-                blank=True,
-                related_name="cover_for_industry",
+        null=True,
+        blank=True,
+        related_name="cover_for_industry",
     )
     is_active = models.BooleanField(default=True)
     sort_order = models.IntegerField(default=0)
-    
-    
+
+
 class IndustryProduct(models.Model):
     industry = models.ForeignKey(
         Industry,
@@ -46,4 +48,3 @@ class IndustryProduct(models.Model):
                 name="unique_industry_product",
             )
         ]
-    
