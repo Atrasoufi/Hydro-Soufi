@@ -27,3 +27,23 @@ class ProductCategoryFilterSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductCategories
         fields = ["id", "name"]
+
+
+class ProductFeaturedListSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Product
+        fields = [
+            "id",
+            "name",
+            "slug",
+            "is_featured",
+            "image",
+        ]
+
+    def get_image(self, obj):
+        if not obj.primary_image:
+            return None
+
+        return obj.primary_image[0].media.file_url

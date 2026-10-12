@@ -3,6 +3,7 @@ from rest_framework import filters
 from ..serializers.read_serailizers import (
     ProductListSerializer,
     ProductCategoryFilterSerializer,
+    ProductFeaturedListSerializer,
 )
 from rest_framework.generics import ListAPIView
 from ...models import Product, ProductImages, ProductCategories
@@ -57,12 +58,35 @@ class ProductListView(ListAPIView):
         )
 
 
-class ProductFeaturedListView(ProductListView):
+class ProductFeaturedListView(ListAPIView):
+    serializer_class = ProductFeaturedListSerializer
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
-        query = super().get_queryset()
-
-        return query.filter(is_featured=True)
+        return (
+            Product.objects.only(
+                "id",
+                "name",
+                "slug",
+            )
+            .filter(is_featured=True)
+            .prefetch_related(
+                Prefetch(
+                    "images",
+                    queryset=ProductImages.objects.filter(
+                        is_primary=True,
+                    )
+                    .select_related("media")
+                    .only(
+                        "id",
+                        "media",
+                        "product",
+                        "media__file_url",
+                    ),
+                    to_attr="primary_image",
+                )
+            )
+        )
 
 
 class ProductCategoryFilterView(ListAPIView):
