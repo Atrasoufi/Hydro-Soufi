@@ -1,8 +1,12 @@
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny
-from ...models import EducationContent
-from apps.education.api.serializers.base_serializers import EducationContentSerializer
+from ...models import EducationContent, EducationCategory
+from apps.education.api.serializers.base_serializers import (
+    EducationContentSerializer,
+    EducationHomeSerializer,
+    EducationCategorySerializer
+)
 from rest_framework import filters
 from ...filter import EducationFilter
 from django_filters.rest_framework import DjangoFilterBackend
@@ -33,4 +37,25 @@ class EducationContentListAPIView(ListAPIView):
             EducationContent.objects.filter(status="PUBLISHED")
             .order_by("-published_at", "-id")
             .select_related("featured_media")
+        )
+
+
+class EducationHomeAPIView(ListAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = EducationHomeSerializer
+
+    def get_queryset(self):
+        return (
+            EducationContent.objects.filter(status="PUBLISHED")
+            .order_by("-published_at", "-id")
+            .select_related("featured_media")
+        )
+
+class EducationCategoryAPIView(ListAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = EducationCategorySerializer
+
+    def get_queryset(self):
+        return (
+            EducationCategory.objects.filter(is_active=True)
         )
