@@ -1,6 +1,7 @@
 services:
   web:
     image: hydrosoufi
+    command: python manage.py runserver
     build:
       context: .
       dockerfile: ./Dockerfile
