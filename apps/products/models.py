@@ -34,13 +34,13 @@ class Product(models.Model):
     )
 
     name = models.CharField(max_length=50)
-    slug = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=200)
 
     short_description = models.TextField()
     full_description = models.TextField()
     technical_description = models.TextField()
 
-    product_code = models.CharField(100, unique=True)
+    product_code = models.CharField(max_length=100, unique=True)
 
     manufacturing_type = models.CharField(max_length=50)
     industry_product = models.ForeignKey(
