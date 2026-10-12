@@ -15,7 +15,7 @@ class Faq(models.Model):
 
 class ProductFaq(models.Model):
     product = models.ForeignKey(
-        "products.Product",
+        "products.Products",
         on_delete=models.CASCADE,
         related_name="product_faqs",
     )

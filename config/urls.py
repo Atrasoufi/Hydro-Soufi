@@ -28,7 +28,6 @@ urlpatterns = [
     # apps
     path("services/api/", include("apps.services.api.urls")),
     path("industries/api/", include("apps.industries.api.urls")),
-    path("industries/api/", include("apps.industries.api.urls")),
     path("leads/api/", include("apps.leads.api.urls")),
     path("education/api/", include("apps.education.api.urls")),
     path("products/api/", include("apps.products.api.urls")),

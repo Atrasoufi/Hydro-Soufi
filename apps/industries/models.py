@@ -5,7 +5,7 @@ from django.db import models
 class Industry(models.Model):
     name = models.CharField(max_length=255)
     products = models.ManyToManyField(
-        "products.Product",
+        "products.Products",
         through="IndustryProduct",
         related_name="industries",
     )
@@ -34,9 +34,9 @@ class IndustryProduct(models.Model):
     )
 
     product = models.ForeignKey(
-        "products.Product",
-        on_delete=models.CASCADE,
-        related_name="industry_products",
+    "products.Products",
+    on_delete=models.CASCADE,
+    related_name="industry_products",
     )
 
     class Meta:

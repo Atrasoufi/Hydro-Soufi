@@ -36,7 +36,7 @@ class EducationCategory(models.Model):
 class EducationContent(models.Model):
 
     products = models.ManyToManyField(
-        "products.Product",
+        "products.Products",
         related_name="educations"
     )
     
