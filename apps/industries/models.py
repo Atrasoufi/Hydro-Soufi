@@ -8,8 +8,8 @@ class Industry(models.Model):
     name = models.CharField(max_length=255)
     products = models.ManyToManyField(
         "products.Product",
-        through="IndustryProduct",
         related_name="industries",
+        blank=True,
     )
     slug = models.SlugField(max_length=255, unique=True)
 

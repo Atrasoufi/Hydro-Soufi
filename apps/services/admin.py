@@ -1,8 +1,7 @@
 from django.contrib import admin
-from .models import Service, ServiceProduct, IndustryService
+from .models import Service
 
 admin.site.register(Service)
-admin.site.register(ServiceProduct)
-admin.site.register(IndustryService)
+
 
 # Register your models here.
