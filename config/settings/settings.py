@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_filters",
     "django_jalali",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -107,6 +108,19 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# REST FRAMEWORK
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+# SPECTACULAR
+SPECTACULAR_SETTINGS = {
+    "TITLE": "My API",
+    "DESCRIPTION": "API documentation",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
@@ -134,3 +148,19 @@ MAILERS = {
         "BACKEND": "django.core.mail.backends.console.EmailBackend",
     },
 }
+
+
+REDIS_URL = os.getenv(
+    "REDIS_URL",
+    "redis://127.0.0.1:6379/1",
+)
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": REDIS_URL,
+        "TIMEOUT": 300,
+        "KEY_PREFIX": "hydro",
+    }
+}
+

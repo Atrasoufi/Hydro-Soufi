@@ -6,6 +6,7 @@ from django_jalali.db import models as jmodels
 
 User = get_user_model()
 
+
 class EducationCategory(models.Model):
 
     parent = models.ForeignKey(
@@ -13,20 +14,14 @@ class EducationCategory(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="children"
+        related_name="children",
     )
 
     name = models.CharField(max_length=255)
 
-    slug = models.SlugField(
-        max_length=255,
-        unique=True
-    )
+    slug = models.SlugField(max_length=255, unique=True)
 
-    description = models.TextField(
-        null=True,
-        blank=True
-    )
+    description = models.TextField(null=True, blank=True)
 
     is_active = models.BooleanField(default=True)
 
@@ -35,51 +30,33 @@ class EducationCategory(models.Model):
 
 class EducationContent(models.Model):
 
-    products = models.ManyToManyField(
-        "products.Product",
-        related_name="educations"
-    )
-    
+    products = models.ManyToManyField("products.Product", related_name="educations")
+
     industries = models.ManyToManyField(
-        "industries.Industry",
-        related_name="educations"
+        "industries.Industry", related_name="educations"
     )
 
-    services = models.ManyToManyField(
-        "services.Service",
-        related_name="educations"
-    )
+    services = models.ManyToManyField("services.Service", related_name="educations")
 
     category = models.ForeignKey(
-        'EducationCategory',
+        "EducationCategory",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name='contents'
+        related_name="contents",
     )
 
     author = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name="education_contents"
+        User, on_delete=models.CASCADE, related_name="education_contents"
     )
 
     title = models.CharField(max_length=255)
 
-    slug = models.SlugField(
-        max_length=255,
-        unique=True
-    )
+    slug = models.SlugField(max_length=255, unique=True)
 
-    excerpt = models.TextField(
-        null=True,
-        blank=True
-    )
+    excerpt = models.TextField(null=True, blank=True)
 
-    content = models.TextField(
-        null=True,
-        blank=True
-    )
+    content = models.TextField(null=True, blank=True)
 
     CONTENT_TYPES = [
         ("ARTICLE", "Article"),
@@ -89,17 +66,15 @@ class EducationContent(models.Model):
     ]
 
     content_type = models.CharField(
-        max_length=30,
-        choices=CONTENT_TYPES,
-        default='ARTICLE'
+        max_length=30, choices=CONTENT_TYPES, default="ARTICLE"
     )
 
     featured_media = models.ForeignKey(
-        'media.Media',
+        "media.Media",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name='featured_contents'
+        related_name="featured_contents",
     )
 
     STATUS = [
@@ -108,41 +83,24 @@ class EducationContent(models.Model):
         ("ARCHIVED", "Archived"),
     ]
 
-    status = models.CharField(
-        max_length=30,
-        choices=STATUS,
-        default='DRAFT'
-    )
+    status = models.CharField(max_length=30, choices=STATUS, default="DRAFT")
 
-    published_at = jmodels.jDateTimeField(
-        null=True,
-        blank=True
-    )
+    published_at = jmodels.jDateTimeField(null=True, blank=True)
 
-    is_featured = models.BooleanField(
-        default=False
-    )
+    is_featured = models.BooleanField(default=False)
 
-    created_at = jmodels.jDateTimeField(
-        auto_now_add=True
-    )
+    created_at = jmodels.jDateTimeField(auto_now_add=True)
 
-    updated_at = jmodels.jDateTimeField(
-        auto_now=True
-    )
+    updated_at = jmodels.jDateTimeField(auto_now=True)
+
 
 class EducationMedia(models.Model):
     education = models.ForeignKey(
-        "EducationContent",
-        on_delete=models.CASCADE,
-        related_name="media"
-
+        "EducationContent", on_delete=models.CASCADE, related_name="media"
     )
 
     media = models.ForeignKey(
-        "media.Media",
-        on_delete=models.CASCADE,
-        related_name="education_media"
+        "media.Media", on_delete=models.CASCADE, related_name="education_media"
     )
 
     media_type = models.CharField(max_length=30)
@@ -156,7 +114,6 @@ class EducationMedia(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["education", "media"],
-                name="unique_education_media"
+                fields=["education", "media"], name="unique_education_media"
             )
         ]

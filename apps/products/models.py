@@ -20,7 +20,7 @@ class ProductCategories(models.Model):
     image_media = models.ForeignKey(
         "media.Media",
         on_delete=models.PROTECT,
-        related_name="product_images",
+        related_name="product_category_images",
         null=True,
         blank=True,
     )
@@ -28,7 +28,7 @@ class ProductCategories(models.Model):
     sort_order = models.IntegerField(default=0)
 
 
-class Products(models.Model):
+class Product(models.Model):
     category = models.ForeignKey(
         ProductCategories, on_delete=models.PROTECT, related_name="products"
     )
@@ -48,7 +48,7 @@ class Products(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="products",
+        related_name="direct_products",
     )
 
     is_custom = models.BooleanField(default=True)
@@ -62,7 +62,7 @@ class Products(models.Model):
 
 class ProductSpec(models.Model):
     product = models.ForeignKey(
-        Products,
+        Product,
         on_delete=models.CASCADE,
         related_name="specs",
     )
@@ -85,7 +85,7 @@ class ProductSpec(models.Model):
 
 class ProductImages(models.Model):
     product = models.ForeignKey(
-        Products, on_delete=models.CASCADE, related_name="images"
+        Product, on_delete=models.CASCADE, related_name="images"
     )
 
     media = models.ForeignKey(

@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import Industry, IndustryProduct
+
+admin.site.register(IndustryProduct)
+admin.site.register(Industry)
 
 # Register your models here.
