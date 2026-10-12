@@ -18,11 +18,11 @@ class ProductCategories(models.Model):
     description = models.TextField()
 
     image_media = models.ForeignKey(
-        "media.Media",
-        on_delete=models.PROTECT,
-        related_name="product_images",
-        null=True,
-        blank=True,
+    "media.Media",
+    on_delete=models.PROTECT,
+    related_name="category_images",
+    null=True,
+    blank=True,
     )
     is_active = models.BooleanField(default=True)
     sort_order = models.IntegerField(default=0)
@@ -43,13 +43,13 @@ class Products(models.Model):
     product_code = models.CharField(100, unique=True)
 
     manufacturing_type = models.CharField(max_length=50)
-    industry_product = models.ForeignKey(
-        "industries.Industry",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="products",
-    )
+    # industry_product = models.ForeignKey(
+    #     "industries.Industry",
+    #     on_delete=models.SET_NULL,
+    #     null=True,
+    #     blank=True,
+    #     related_name="products",
+    # )
 
     is_custom = models.BooleanField(default=True)
 

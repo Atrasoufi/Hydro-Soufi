@@ -30,7 +30,7 @@ class ServiceProduct(models.Model):
     )
 
     product = models.ForeignKey(
-        "products.Product",
+        "products.Products",
         on_delete=models.CASCADE,
         related_name="service_products",
     )
