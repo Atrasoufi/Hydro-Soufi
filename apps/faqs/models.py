@@ -1,21 +1,22 @@
 from django.db import models
 
+
 class Faq(models.Model):
     question = models.CharField(max_length=255)
     answer = models.TextField()
-    
+
     category = models.CharField(max_length=100)
 
     sort_order = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
-    
+
     def __str__(self):
         return self.question
-    
+
 
 class ProductFaq(models.Model):
     product = models.ForeignKey(
-        "products.Products",
+        "products.Product",
         on_delete=models.CASCADE,
         related_name="product_faqs",
     )
@@ -32,7 +33,8 @@ class ProductFaq(models.Model):
                 name="unique_product_faq",
             )
         ]
-        
+
+
 class ServiceFaq(models.Model):
     service = models.ForeignKey(
         "services.Service",
@@ -52,7 +54,8 @@ class ServiceFaq(models.Model):
                 name="unique_service_faq",
             )
         ]
-        
+
+
 class IndustryFaq(models.Model):
     industry = models.ForeignKey(
         "industries.Industry",
