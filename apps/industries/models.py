@@ -28,23 +28,4 @@ class Industry(models.Model):
     sort_order = models.IntegerField(default=0)
 
 
-class IndustryProduct(models.Model):
-    industry = models.ForeignKey(
-        Industry,
-        on_delete=models.CASCADE,
-        related_name="industry_products",
-    )
 
-    product = models.ForeignKey(
-        "products.Product",
-        on_delete=models.CASCADE,
-        related_name="industry_products",
-    )
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["industry", "product"],
-                name="unique_industry_product",
-            )
-        ]
