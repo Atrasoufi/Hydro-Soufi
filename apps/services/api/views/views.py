@@ -11,7 +11,7 @@ from ..serializers.read_serializers import ServiceReadSerializer
 class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ServiceReadSerializer
 
-    queryset = Service.objects.filter(is_active=True).order_by("sort_order", "id")
+    queryset = Service.objects.filter(is_active=True).order_by("id")
 
     filter_backends = [
         filters.SearchFilter,
