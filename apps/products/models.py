@@ -14,18 +14,9 @@ class ProductCategories(models.Model):
         related_name="children",
     )
     name = models.CharField(max_length=50)
-    slug = models.CharField(max_length=200)
     description = models.TextField()
 
-    image_media = models.ForeignKey(
-        "media.Media",
-        on_delete=models.PROTECT,
-        related_name="product_category_images",
-        null=True,
-        blank=True,
-    )
     is_active = models.BooleanField(default=True)
-    sort_order = models.IntegerField(default=0)
 
 
 class Product(models.Model):
@@ -38,11 +29,7 @@ class Product(models.Model):
 
     short_description = models.TextField()
     full_description = models.TextField()
-    technical_description = models.TextField()
 
-    product_code = models.CharField(max_length=100, unique=True)
-
-    manufacturing_type = models.CharField(max_length=50)
     industry_product = models.ForeignKey(
         "industries.Industry",
         on_delete=models.SET_NULL,
@@ -77,8 +64,6 @@ class ProductSpec(models.Model):
         null=True,
     )
 
-    sort_order = models.IntegerField(default=0)
-
     def __str__(self):
         return f"{self.specification_name}: {self.specification_value}"
 
@@ -92,10 +77,7 @@ class ProductImages(models.Model):
         "media.Media", on_delete=models.PROTECT, related_name="product_images"
     )
 
-    alt_text = models.CharField(max_length=50)
-
     is_primary = models.BooleanField(default=False)
-    sorted_order = models.IntegerField(default=0)
 
     class Meta:
         constraints = [

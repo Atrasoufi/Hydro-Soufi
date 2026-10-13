@@ -13,17 +13,6 @@ class Media(models.Model):
         blank=True,
     )
 
-    mime_type = models.CharField(
-        max_length=100,
-        null=True,
-        blank=True,
-    )
-
-    file_size = models.BigIntegerField(
-        null=True,
-        blank=True,
-    )
-
     title = models.CharField(
         max_length=255,
         null=True,
@@ -34,12 +23,6 @@ class Media(models.Model):
         max_length=255,
         null=True,
         blank=True,
-    )
-
-    uploaded_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.PROTECT,
-        related_name="uploaded_media",
     )
 
     created_at = models.DateTimeField()
