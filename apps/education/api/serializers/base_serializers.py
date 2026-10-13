@@ -22,7 +22,6 @@ class EducationContentSerializer(serializers.ModelSerializer):
             "excerpt",
             "content_type",
             "featured_media",
-            "published_at",
         ]
 
 

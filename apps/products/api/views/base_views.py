@@ -21,11 +21,10 @@ class ProductDetailView(RetrieveAPIView):
                         "product",
                         "media",
                         "media__file_url",
-                        "alt_text",
+                        "media__alt_text",
                         "is_primary",
-                        "sorted_order",
                     )
-                    .order_by("sorted_order", "id")
+                    .order_by("id")
                 ),
             ),
             Prefetch(
@@ -36,7 +35,7 @@ class ProductDetailView(RetrieveAPIView):
                         "product",
                         "specification_name",
                         "specification_value",
-                    ).order_by("sort_order", "id")
+                    ).order_by("id")
                 ),
             ),
         )
