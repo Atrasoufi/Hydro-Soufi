@@ -5,8 +5,6 @@ class Faq(models.Model):
     question = models.CharField(max_length=255)
     answer = models.TextField()
 
-    category = models.CharField(max_length=100)
-
     products = models.ManyToManyField(
         "products.Product",
         related_name="faqs",
@@ -25,7 +23,7 @@ class Faq(models.Model):
         blank=True,
     )
 
-    sort_order = models.IntegerField(default=0)
+
     is_active = models.BooleanField(default=True)
 
     def __str__(self):

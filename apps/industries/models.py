@@ -11,10 +11,8 @@ class Industry(models.Model):
         related_name="industries",
         blank=True,
     )
-    slug = models.SlugField(max_length=255, unique=True)
 
     short_description = models.TextField(blank=True)
-    full_description = models.TextField(blank=True)
 
     icon = models.CharField(max_length=255, blank=True)
     cover_image = models.ForeignKey(
@@ -25,7 +23,6 @@ class Industry(models.Model):
         related_name="cover_for_industry",
     )
     is_active = models.BooleanField(default=True)
-    sort_order = models.IntegerField(default=0)
 
 
 

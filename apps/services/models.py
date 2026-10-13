@@ -3,11 +3,9 @@ from django.db import models
 
 class Service(models.Model):
     name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100, unique=True)
 
     short_description = models.TextField(blank=True)
-    full_description = models.TextField(blank=True)
-
+    
     icon = models.CharField(max_length=255, blank=True)
     cover_image = models.ForeignKey(
         "media.Media",
@@ -32,5 +30,5 @@ class Service(models.Model):
     is_featured = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
-    sort_order = models.IntegerField(default=0)
+
 
