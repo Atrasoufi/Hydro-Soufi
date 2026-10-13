@@ -19,13 +19,10 @@ class EducationCategory(models.Model):
 
     name = models.CharField(max_length=255)
 
-    slug = models.SlugField(max_length=255, unique=True)
-
     description = models.TextField(null=True, blank=True)
 
     is_active = models.BooleanField(default=True)
 
-    sort_order = models.IntegerField(default=0)
 
 
 class EducationContent(models.Model):
@@ -85,8 +82,6 @@ class EducationContent(models.Model):
 
     status = models.CharField(max_length=30, choices=STATUS, default="DRAFT")
 
-    published_at = jmodels.jDateTimeField(null=True, blank=True)
-
     is_featured = models.BooleanField(default=False)
 
     created_at = jmodels.jDateTimeField(auto_now_add=True)
@@ -102,10 +97,6 @@ class EducationMedia(models.Model):
     media = models.ForeignKey(
         "media.Media", on_delete=models.CASCADE, related_name="education_media"
     )
-
-    media_type = models.CharField(max_length=30)
-
-    sort_order = models.IntegerField(default=0)
 
     is_primary = models.BooleanField(default=False)
 

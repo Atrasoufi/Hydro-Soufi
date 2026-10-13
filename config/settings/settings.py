@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     "apps.faqs",
     "apps.industries",
     "apps.media",
-    "apps.search",
     "apps.services",
     # Third-party apps
     "rest_framework",
