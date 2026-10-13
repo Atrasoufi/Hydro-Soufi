@@ -15,15 +15,5 @@ class ContactRequest(models.Model):
     subject = models.CharField(max_length=255)
     message = models.TextField()
 
-    status = models.CharField(max_length=90,default="NEW")
-
-    assigned_to = models.ForeignKey(
-        User,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="contact_requests",
-    )
-
     created_at = jmodels.jDateTimeField(auto_now_add=True)
     updated_at = jmodels.jDateTimeField(auto_created=True)
