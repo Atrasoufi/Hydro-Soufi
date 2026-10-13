@@ -26,7 +26,6 @@ class ProductImageSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "url",
-            "alt_text",
             "is_primary",
         ]
 

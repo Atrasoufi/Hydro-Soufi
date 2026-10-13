@@ -13,6 +13,10 @@ urlpatterns = [
         EducationContentDetailAPIView.as_view(),
         name="education-detail",
     ),
-    path('education/home/',EducationHomeAPIView.as_view(),name='education-home'),
-    path('education/cagetory/',EducationCategoryAPIView.as_view(),name='education-category'),
+    path("home/", EducationHomeAPIView.as_view(), name="education-home"),
+    path(
+        "cagetory/",
+        EducationCategoryAPIView.as_view(),
+        name="education-category",
+    ),
 ]

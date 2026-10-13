@@ -18,7 +18,6 @@ class IndustrySerializer(serializers.ModelSerializer):
         model = Industry
         fields = [
             "name",
-            "slug",
             "short_description",
             "icon",
             "cover_image",
@@ -29,7 +28,8 @@ class IndustryFilterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Industry
         fields = ["id", "name"]
-        
+
+
 class IndustryHomeSerializer(serializers.ModelSerializer):
     cover_image = serializers.SerializerMethodField()
 
@@ -42,4 +42,3 @@ class IndustryHomeSerializer(serializers.ModelSerializer):
             return industry.cover_image.file_url
 
         return None
-    

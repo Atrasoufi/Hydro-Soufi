@@ -6,13 +6,10 @@ class ServiceWriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
         fields = [
+            "id",
             "name",
-            "slug",
             "short_description",
             "icon",
             "is_featured",
             "is_active",
         ]
-        extra_kwargs = {
-            "slug": {"required": False},
-        }

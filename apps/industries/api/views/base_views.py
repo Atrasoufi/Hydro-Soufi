@@ -15,7 +15,7 @@ class IndustryListAPIView(ListAPIView):
     def get_queryset(self):
         return (
             Industry.objects.filter(is_active=True)
-            .order_by("sort_order")
+            .order_by("id")
             .select_related("cover_image")
         )
 
@@ -27,7 +27,7 @@ class IndustryFilterListView(ListAPIView):
         return Industry.objects.filter(
             is_active=True,
             name__gt="",
-        ).order_by("sort_order", "id")
+        ).order_by("id")
 
 
 class IndustryHomeListView(ListAPIView):
@@ -37,4 +37,4 @@ class IndustryHomeListView(ListAPIView):
         return Industry.objects.filter(
             is_active=True,
             name__gt="",
-        ).order_by("sort_order", "id")
+        ).order_by("id")

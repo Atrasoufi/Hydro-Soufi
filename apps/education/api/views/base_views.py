@@ -5,7 +5,7 @@ from ...models import EducationContent, EducationCategory
 from apps.education.api.serializers.base_serializers import (
     EducationContentSerializer,
     EducationHomeSerializer,
-    EducationCategorySerializer
+    EducationCategorySerializer,
 )
 from rest_framework import filters
 from ...filter import EducationFilter
@@ -35,7 +35,7 @@ class EducationContentListAPIView(ListAPIView):
     def get_queryset(self):
         return (
             EducationContent.objects.filter(status="PUBLISHED")
-            .order_by("-published_at", "-id")
+            .order_by("-id")
             .select_related("featured_media")
         )
 
@@ -47,15 +47,14 @@ class EducationHomeAPIView(ListAPIView):
     def get_queryset(self):
         return (
             EducationContent.objects.filter(status="PUBLISHED")
-            .order_by("-published_at", "-id")
+            .order_by("-id")
             .select_related("featured_media")
         )
+
 
 class EducationCategoryAPIView(ListAPIView):
     permission_classes = [AllowAny]
     serializer_class = EducationCategorySerializer
 
     def get_queryset(self):
-        return (
-            EducationCategory.objects.filter(is_active=True)
-        )
+        return EducationCategory.objects.filter(is_active=True)

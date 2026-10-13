@@ -8,7 +8,6 @@ class ServiceBaseSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "name",
-            "slug",
             "short_description",
             "icon",
             "is_featured",
