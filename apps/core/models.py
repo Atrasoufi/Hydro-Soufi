@@ -39,8 +39,7 @@ class SiteSettings(models.Model):
 
 class AboutSection(models.Model):
     title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, unique=True)
-    
+ 
     short_description = models.TextField()
     content = models.TextField()
     
