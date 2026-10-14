@@ -5,7 +5,7 @@ class Service(models.Model):
     name = models.CharField(max_length=100)
 
     short_description = models.TextField(blank=True)
-    
+
     icon = models.CharField(max_length=255, blank=True)
     cover_image = models.ForeignKey(
         "media.Media",
@@ -30,5 +30,7 @@ class Service(models.Model):
     is_featured = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.name
 
 

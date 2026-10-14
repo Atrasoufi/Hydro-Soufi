@@ -18,6 +18,9 @@ class ProductCategories(models.Model):
 
     is_active = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Product(models.Model):
     category = models.ForeignKey(
@@ -45,6 +48,9 @@ class Product(models.Model):
 
     created_at = jmodels.jDateTimeField(auto_now_add=True)
     updated_at = jmodels.jDateTimeField()
+
+    def __str__(self):
+        return self.name
 
 
 class ProductSpec(models.Model):
@@ -91,3 +97,6 @@ class ProductImages(models.Model):
                 name="unique_user_product",
             ),
         ]
+
+    def __str__(self):
+        return f"{self.product.name} - {self.media.file_name}"
