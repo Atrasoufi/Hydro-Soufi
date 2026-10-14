@@ -16,6 +16,7 @@ class EducationPagination(PageNumberPagination):
     page_size = 12
 
 
+# Lists published education content with filtering, title search, and pagination.
 class EducationContentListAPIView(ListAPIView):
     permission_classes = [AllowAny]
     pagination_class = EducationPagination
@@ -40,18 +41,21 @@ class EducationContentListAPIView(ListAPIView):
         )
 
 
+# Provides the latest published education content for the homepage.
 class EducationHomeAPIView(ListAPIView):
     permission_classes = [AllowAny]
     serializer_class = EducationHomeSerializer
 
     def get_queryset(self):
+        # Keep the homepage feed limited to the four newest published items.
         return (
             EducationContent.objects.filter(status="PUBLISHED")
             .order_by("-id")
-            .select_related("featured_media")
+            .select_related("featured_media")[:4]
         )
 
 
+# Lists only active education categories.
 class EducationCategoryAPIView(ListAPIView):
     permission_classes = [AllowAny]
     serializer_class = EducationCategorySerializer
