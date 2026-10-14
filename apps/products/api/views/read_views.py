@@ -17,6 +17,7 @@ class ProductPagination(PageNumberPagination):
     page_size = 10
 
 
+# Lists searchable and filterable products with their primary images.
 class ProductListView(ListAPIView):
     serializer_class = ProductListSerializer
     permission_classes = [AllowAny]
@@ -58,6 +59,7 @@ class ProductListView(ListAPIView):
         )
 
 
+# Lists up to four featured products with their primary images.
 class ProductFeaturedListView(ListAPIView):
     serializer_class = ProductFeaturedListSerializer
     permission_classes = [AllowAny]
@@ -85,10 +87,11 @@ class ProductFeaturedListView(ListAPIView):
                     ),
                     to_attr="primary_image",
                 )
-            )
+            )[:4]
         )
 
 
+# Lists product categories for filter options.
 class ProductCategoryFilterView(ListAPIView):
     permission_classes = [AllowAny]
     serializer_class = ProductCategoryFilterSerializer
