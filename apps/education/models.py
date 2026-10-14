@@ -23,6 +23,9 @@ class EducationCategory(models.Model):
 
     is_active = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.name
+
 
 
 class EducationContent(models.Model):
@@ -88,6 +91,9 @@ class EducationContent(models.Model):
 
     updated_at = jmodels.jDateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.title
+
 
 class EducationMedia(models.Model):
     education = models.ForeignKey(
@@ -102,9 +108,13 @@ class EducationMedia(models.Model):
 
     caption = models.CharField(max_length=500, null=True, blank=True)
 
+    def __str__(self):
+        return f"{self.education.title} - {self.media.file_name}"
+
     class Meta:
         constraints = [
             models.UniqueConstraint(
                 fields=["education", "media"], name="unique_education_media"
             )
         ]
+

@@ -17,3 +17,6 @@ class ContactRequest(models.Model):
 
     created_at = jmodels.jDateTimeField(auto_now_add=True)
     updated_at = jmodels.jDateTimeField(auto_created=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.subject}"

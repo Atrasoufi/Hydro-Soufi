@@ -32,6 +32,8 @@ class SEOMetadata(models.Model):
 
     no_index = models.BooleanField(default=False)
 
+
+
     class Meta:
         constraints = [
             models.UniqueConstraint(
@@ -39,3 +41,6 @@ class SEOMetadata(models.Model):
                 name="unique_seo_entity",
             )
         ]
+
+    def __str__(self):
+        return self.meta_title or f"{self.entity_type} #{self.entity_id}"
