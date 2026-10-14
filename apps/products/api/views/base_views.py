@@ -37,5 +37,6 @@ class ProductDetailView(RetrieveAPIView):
                         "specification_value",
                     ).order_by("id")
                 ),
+                to_attr="product_specs",
             ),
         )
