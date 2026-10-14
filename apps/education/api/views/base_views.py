@@ -49,7 +49,10 @@ class EducationHomeAPIView(ListAPIView):
     def get_queryset(self):
         # Keep the homepage feed limited to the four newest published items.
         return (
-            EducationContent.objects.filter(status="PUBLISHED")
+            EducationContent.objects.only(
+                "id", "is_featured", "slug", "title", "featured_media"
+            )
+            .filter(status="PUBLISHED", is_featured=True)
             .order_by("-id")
             .select_related("featured_media")[:4]
         )

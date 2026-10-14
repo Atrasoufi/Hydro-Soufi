@@ -39,7 +39,7 @@ class EducationHomeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EducationContent
-        fields = ["title", "featured_media"]
+        fields = ["slug", "title", "featured_media"]
 
 
 class EducationCategorySerializer(serializers.ModelSerializer):
