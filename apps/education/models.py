@@ -27,7 +27,6 @@ class EducationCategory(models.Model):
         return self.name
 
 
-
 class EducationContent(models.Model):
 
     products = models.ManyToManyField("products.Product", related_name="educations")
@@ -117,4 +116,3 @@ class EducationMedia(models.Model):
                 fields=["education", "media"], name="unique_education_media"
             )
         ]
-
