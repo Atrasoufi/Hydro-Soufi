@@ -95,9 +95,17 @@ class ProductImages(models.Model):
             ),
             models.UniqueConstraint(
                 fields=["product", "media"],
-                name="unique_user_product",
+                name="unique_product_image",
             ),
         ]
+
+    def clean(self):
+        super().clean()
+
+        if self.media_id and self.media.media_type != "image":
+            raise ValidationError({
+                "media": "Only image media can be attached here."
+            })
 
     def __str__(self):
         return f"{self.product.name} - {self.media.file_name}"
