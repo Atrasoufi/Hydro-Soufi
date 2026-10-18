@@ -59,23 +59,8 @@ class EducationContentListAPIView(ListAPIView):
                     )
                     .order_by("id"),
                 ),
-                Prefetch(
-                    "videos",
-                    queryset=EducationVideo.objects.select_related("media")
-                    .only(
-                        "id",
-                        "education",
-                        "media",
-                        "is_primary",
-                        "caption",
-                        "media__file_url",
-                        "media__video_source",
-                    )
-                    .order_by("id"),
-                ),
             )
         )
-
 
 # Provides the latest published education content for the homepage.
 class EducationHomeAPIView(ListAPIView):
