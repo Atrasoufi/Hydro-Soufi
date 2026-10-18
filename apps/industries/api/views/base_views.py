@@ -8,7 +8,12 @@ from apps.industries.api.serializers.base_serializers import (
 )
 
 
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+
 # Lists active industries with their cover images.
+
+@method_decorator(cache_page(60 * 5), name="dispatch")
 class IndustryListAPIView(ListAPIView):
     serializer_class = IndustrySerializer
     permission_classes = [AllowAny]
@@ -22,6 +27,8 @@ class IndustryListAPIView(ListAPIView):
 
 
 # Lists active, named industries for filter options.
+
+@method_decorator(cache_page(60 * 5), name="dispatch")
 class IndustryFilterListView(ListAPIView):
     serializer_class = IndustryFilterSerializer
 
@@ -33,6 +40,9 @@ class IndustryFilterListView(ListAPIView):
 
 
 # Provides up to four active, named industries for the homepage.
+
+
+@method_decorator(cache_page(60 * 5), name="dispatch")
 class IndustryHomeListView(ListAPIView):
     serializer_class = IndustryHomeSerializer
 

@@ -12,12 +12,16 @@ from rest_framework.permissions import AllowAny
 from rest_framework.pagination import PageNumberPagination
 from ...filters import ProductFilter
 
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+
 
 class ProductPagination(PageNumberPagination):
     page_size = 10
 
 
 # Lists searchable and filterable products with their primary images.
+@method_decorator(cache_page(60 * 2), name="dispatch")
 class ProductListView(ListAPIView):
     serializer_class = ProductListSerializer
     permission_classes = [AllowAny]
@@ -60,6 +64,7 @@ class ProductListView(ListAPIView):
 
 
 # Lists up to four featured products with their primary images.
+@method_decorator(cache_page(60 * 5), name="dispatch")
 class ProductFeaturedListView(ListAPIView):
     serializer_class = ProductFeaturedListSerializer
     permission_classes = [AllowAny]
@@ -92,6 +97,8 @@ class ProductFeaturedListView(ListAPIView):
 
 
 # Lists product categories for filter options.
+
+@method_decorator(cache_page(60 * 5), name="dispatch")
 class ProductCategoryFilterView(ListAPIView):
     permission_classes = [AllowAny]
     serializer_class = ProductCategoryFilterSerializer
