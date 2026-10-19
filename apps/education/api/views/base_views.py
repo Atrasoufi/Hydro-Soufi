@@ -48,6 +48,7 @@ class EducationContentListAPIView(ListAPIView):
 
 
 # Provides the latest published education content for the homepage.
+@method_decorator(cache_page(60 * 2), name="dispatch")
 class EducationHomeAPIView(ListAPIView):
     permission_classes = [AllowAny]
     serializer_class = EducationHomeSerializer
@@ -65,6 +66,7 @@ class EducationHomeAPIView(ListAPIView):
 
 
 # Lists only active education categories.
+@method_decorator(cache_page(60 * 2), name="dispatch")
 class EducationCategoryAPIView(ListAPIView):
     permission_classes = [AllowAny]
     serializer_class = EducationCategorySerializer
