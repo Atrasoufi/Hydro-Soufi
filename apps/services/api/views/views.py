@@ -8,7 +8,13 @@ from ...models import Service
 from ..serializers.read_serializers import ServiceReadSerializer
 
 
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+
+
+
 # Exposes active services with search over their names and descriptions.
+@method_decorator(cache_page(60 * 5), name="dispatch")
 class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ServiceReadSerializer
 
@@ -19,7 +25,7 @@ class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
         DjangoFilterBackend,
     ]
 
-    filter_backends = [filters.SearchFilter]
+    # filter_backends = [filters.SearchFilter]
     search_fields = ["name", "short_description"]
 
     # Returns up to four featured services for the homepage.

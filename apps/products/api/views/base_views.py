@@ -5,6 +5,12 @@ from ..serializers.base_serializers import ProductDetailSerializer
 from ...models import Product, ProductImages, ProductSpec, ProductVideos
 
 
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+
+
+
+@method_decorator(cache_page(60 * 2), name="dispatch")
 class ProductDetailView(RetrieveAPIView):
     serializer_class = ProductDetailSerializer
     permission_classes = [AllowAny]

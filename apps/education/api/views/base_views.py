@@ -18,11 +18,17 @@ from ...filter import EducationFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
 
+
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+
+
 class EducationPagination(PageNumberPagination):
     page_size = 12
 
 
 # Lists published education content with filtering, title search, and pagination.
+@method_decorator(cache_page(60 * 5), name="dispatch")
 class EducationContentListAPIView(ListAPIView):
     permission_classes = [AllowAny]
     pagination_class = EducationPagination
@@ -63,6 +69,7 @@ class EducationContentListAPIView(ListAPIView):
         )
 
 # Provides the latest published education content for the homepage.
+@method_decorator(cache_page(60 * 2), name="dispatch")
 class EducationHomeAPIView(ListAPIView):
     permission_classes = [AllowAny]
     serializer_class = EducationHomeSerializer
@@ -80,6 +87,7 @@ class EducationHomeAPIView(ListAPIView):
 
 
 # Lists only active education categories.
+@method_decorator(cache_page(60 * 2), name="dispatch")
 class EducationCategoryAPIView(ListAPIView):
     permission_classes = [AllowAny]
     serializer_class = EducationCategorySerializer
