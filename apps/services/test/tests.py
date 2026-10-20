@@ -24,8 +24,7 @@ class ServiceCacheTests(TestCase):
         self.assertTrue(cache.keys("*"))
 
     def test_service_cache_is_cleared_on_update(self):
-        url = reverse("service-list")
-        self.client.get(url)
+        self.client.get(reverse("service-list"))
         self.assertTrue(cache.keys("*"))
 
         self.service.name = "Updated Hydraulic Service"
