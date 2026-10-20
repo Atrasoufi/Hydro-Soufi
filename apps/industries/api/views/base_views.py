@@ -13,6 +13,7 @@ from django.views.decorators.cache import cache_page
 
 # Lists active industries with their cover images.
 
+
 @method_decorator(cache_page(60 * 5), name="dispatch")
 class IndustryListAPIView(ListAPIView):
     serializer_class = IndustrySerializer
@@ -27,6 +28,7 @@ class IndustryListAPIView(ListAPIView):
 
 
 # Lists active, named industries for filter options.
+
 
 @method_decorator(cache_page(60 * 5), name="dispatch")
 class IndustryFilterListView(ListAPIView):
@@ -47,9 +49,11 @@ class IndustryHomeListView(ListAPIView):
     serializer_class = IndustryHomeSerializer
 
     def get_queryset(self):
-        return ( Industry.objects.filter(
-            is_active=True,
-            name__gt="",
-        ).order_by("id")
-        .select_related('cover_image')[:4]
+        return (
+            Industry.objects.filter(
+                is_active=True,
+                name__gt="",
+            )
+            .order_by("id")
+            .select_related("cover_image")[:8]
         )
