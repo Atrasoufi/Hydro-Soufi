@@ -40,26 +40,30 @@ class ProductListView(ListAPIView):
     ]
 
     def get_queryset(self):
-        return Product.objects.only(
-            "id",
-            "name",
-            "slug",
-            "short_description",
-        ).prefetch_related(
-            Prefetch(
-                "images",
-                queryset=ProductImages.objects.filter(
-                    is_primary=True,
-                )
-                .select_related("media")
-                .only(
-                    "id",
-                    "media",
-                    "product",
-                    "media__file_url",
-                ),
-                to_attr="primary_image",
+        return (
+            Product.objects.only(
+                "id",
+                "name",
+                "slug",
+                "short_description",
             )
+            .prefetch_related(
+                Prefetch(
+                    "images",
+                    queryset=ProductImages.objects.filter(
+                        is_primary=True,
+                    )
+                    .select_related("media")
+                    .only(
+                        "id",
+                        "media",
+                        "product",
+                        "media__file_url",
+                    ),
+                    to_attr="primary_image",
+                )
+            )
+            .order_by("-id")
         )
 
 
@@ -92,11 +96,13 @@ class ProductFeaturedListView(ListAPIView):
                     ),
                     to_attr="primary_image",
                 )
-            )[:4]
+            )
+            .order_by("-id")[:4]
         )
 
 
 # Lists product categories for filter options.
+
 
 @method_decorator(cache_page(60 * 5), name="dispatch")
 class ProductCategoryFilterView(ListAPIView):

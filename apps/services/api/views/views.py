@@ -12,13 +12,16 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
 
-
 # Exposes active services with search over their names and descriptions.
 @method_decorator(cache_page(60 * 5), name="dispatch")
 class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ServiceReadSerializer
 
-    queryset = Service.objects.filter(is_active=True).order_by("id")
+    queryset = (
+        Service.objects.filter(is_active=True)
+        .select_related("cover_image")
+        .order_by("id")
+    )
 
     filter_backends = [
         filters.SearchFilter,
@@ -31,7 +34,7 @@ class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
     # Returns up to four featured services for the homepage.
     @action(detail=False, methods=["get"])
     def home(self, request):
-        services = self.get_queryset().filter(is_featured=True)[:4]
+        services = self.get_queryset().filter(is_featured=True)[:6]
 
         serializer = self.get_serializer(services, many=True)
         return Response(serializer.data)

@@ -18,7 +18,6 @@ from ...filter import EducationFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
 
-
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
@@ -68,6 +67,7 @@ class EducationContentListAPIView(ListAPIView):
             )
         )
 
+
 # Provides the latest published education content for the homepage.
 @method_decorator(cache_page(60 * 2), name="dispatch")
 class EducationHomeAPIView(ListAPIView):
@@ -82,7 +82,7 @@ class EducationHomeAPIView(ListAPIView):
             )
             .filter(status="PUBLISHED", is_featured=True)
             .order_by("-id")
-            .select_related("featured_media")[:4]
+            .select_related("featured_media")[:3]
         )
 
 
