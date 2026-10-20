@@ -34,7 +34,7 @@ class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
     # Returns up to four featured services for the homepage.
     @action(detail=False, methods=["get"])
     def home(self, request):
-        services = self.get_queryset().filter(is_featured=True)[:4]
+        services = self.get_queryset().filter(is_featured=True)[:6]
 
         serializer = self.get_serializer(services, many=True)
         return Response(serializer.data)
