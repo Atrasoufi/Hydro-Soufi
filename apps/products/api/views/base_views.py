@@ -9,7 +9,6 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
 
-
 @method_decorator(cache_page(60 * 2), name="dispatch")
 class ProductDetailView(RetrieveAPIView):
     serializer_class = ProductDetailSerializer
@@ -34,7 +33,6 @@ class ProductDetailView(RetrieveAPIView):
                     .order_by("id")
                 ),
             ),
-
             Prefetch(
                 "videos",
                 queryset=(
@@ -50,7 +48,6 @@ class ProductDetailView(RetrieveAPIView):
                     .order_by("id")
                 ),
             ),
-
             Prefetch(
                 "specs",
                 queryset=(
